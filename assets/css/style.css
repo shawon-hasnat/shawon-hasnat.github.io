@@ -1,3 +1,4 @@
+.avatar{height:auto}
 :root{--bg:#FFFFFF;--surface:#F7F8FA;--card:#FFFFFF;--ink:#171B26;--muted:#586072;--line:#E6E8EE;--p:#D7263D;--p2:#1F2937;--on:#FFFFFF;--c0:#D7263D;--c1:#C2410C;--c2:#A4161A;--c3:#475569;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#04060C;--surface:#0A0F1C;--card:#0E1526;--ink:#E7EDFB;--muted:#8F9BB8;--line:#1A2542;--p:#3B82F6;--p2:#9DB7E8;--on:#04060C;--c0:#3B82F6;--c1:#38BDF8;--c2:#818CF8;--c3:#94A3B8;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#04060C;--surface:#0A0F1C;--card:#0E1526;--ink:#E7EDFB;--muted:#8F9BB8;--line:#1A2542;--p:#3B82F6;--p2:#9DB7E8;--on:#04060C;--c0:#3B82F6;--c1:#38BDF8;--c2:#818CF8;--c3:#94A3B8;color-scheme:dark}
