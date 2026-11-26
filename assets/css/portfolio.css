@@ -1,0 +1,100 @@
+/* Portfolio পেজের 3D স্টাইল। style.css-এর পরে লোড হবে।
+   প্রতিটি সেকশনের রং আসে --g1 / --g2 থেকে (assets/js/portfolio.js-এর PAL)। ডার্ক/লাইট দুই মোডেই কাজ করে। */
+.pv { padding-top: 10px; padding-bottom: 40px; --g1: #e11d48; --g2: #f97316; }
+.pf-title { margin: 6px 0 14px; }
+.pf-p { margin: 0 0 16px; line-height: 1.8; max-width: 66ch; }
+.pf-h { margin: 26px 0 10px; }
+.pills .pf-on { background: var(--c0, #dc2638); color: #fff; border-color: transparent; }
+
+/* ---------- 3D কভারফ্লো ডেক ---------- */
+.pf-wrap { padding-top: 14px; }
+.pf-stage { position: relative; height: 206px; perspective: 900px; overflow: hidden; touch-action: pan-y;
+  user-select: none; -webkit-user-select: none; cursor: grab; outline: none; }
+.pf-stage:active { cursor: grabbing; }
+.pf-deck { position: absolute; inset: 0; transform-style: preserve-3d; }
+.pf-floor { position: absolute; left: 50%; bottom: 6px; width: 210px; height: 20px; transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, .35), transparent 70%); pointer-events: none; }
+.pf-card { position: absolute; left: 50%; top: 50%; width: 132px; height: 156px; margin: -88px 0 0 -66px;
+  border-radius: 22px; padding: 14px; color: #fff; display: flex; flex-direction: column; justify-content: space-between;
+  background: linear-gradient(150deg, var(--g1), var(--g2));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), inset 0 -3px 0 rgba(0, 0, 0, .18), 0 18px 30px -12px rgba(0, 0, 0, .5);
+  will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+.pf-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(120deg, rgba(255, 255, 255, .32), rgba(255, 255, 255, 0) 46%); }
+.pf-card i { font-style: normal; font-size: 2.4em; line-height: 1; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .3)); }
+.pf-card strong { display: block; font-size: .95em; line-height: 1.25; }
+.pf-card small { display: block; margin-top: 3px; opacity: .8; font-size: .75em; letter-spacing: .08em; }
+.pf-card.front { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), inset 0 -3px 0 rgba(0, 0, 0, .18),
+  0 22px 36px -12px color-mix(in srgb, var(--g1) 70%, #000 30%), 0 0 0 2px rgba(255, 255, 255, .35); }
+.pf-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 4px 0 6px; }
+.pf-nav .pf-hint { font-size: .85em; opacity: .65; text-align: center; flex: 0 1 auto; }
+.pf-arrow { flex: none; width: 42px; height: 42px; border: 0; border-radius: 14px; cursor: pointer; font-size: 1.3em; color: #fff;
+  background: linear-gradient(135deg, var(--g1), var(--g2));
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--g1) 55%, #000 45%); transition: transform .08s, box-shadow .08s; }
+.pf-arrow:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--g1) 55%, #000 45%); }
+.pf-arrow:disabled { opacity: .35; cursor: default; }
+.pf-dots { display: flex; justify-content: center; gap: 6px; margin: 4px 0 2px; }
+.pf-dots span { width: 7px; height: 7px; border-radius: 50%; background: color-mix(in srgb, currentColor 22%, transparent); transition: all .25s; }
+.pf-dots span.on { width: 22px; border-radius: 6px; background: linear-gradient(90deg, var(--g1), var(--g2)); }
+
+/* ---------- কনটেন্ট এলাকা ---------- */
+.pf-sheet { padding: 18px; border-radius: 24px; max-width: 760px;
+  border: 1px solid color-mix(in srgb, var(--g1) 36%, transparent);
+  background: linear-gradient(150deg, color-mix(in srgb, var(--g1) 12%, transparent), color-mix(in srgb, var(--g2) 6%, transparent));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22),
+    0 6px 0 -2px color-mix(in srgb, var(--g1) 28%, transparent),
+    0 28px 40px -24px color-mix(in srgb, var(--g1) 70%, transparent); }
+.pf-sheet > :last-child { margin-bottom: 0; }
+
+/* নোট */
+.pf-note { margin: 16px 0; padding: 12px 14px; border-radius: 14px; font-size: .93em; line-height: 1.6;
+  border: 1px dashed color-mix(in srgb, var(--g1) 50%, transparent); opacity: .9; }
+
+/* বাটন */
+.pf-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; }
+.pf-btn { display: inline-block; text-decoration: none; padding: 10px 18px; border-radius: 14px; font-weight: 600; color: inherit;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  box-shadow: 0 4px 0 color-mix(in srgb, currentColor 22%, transparent); transition: transform .08s, box-shadow .08s; }
+.pf-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, currentColor 22%, transparent); }
+.pf-btn.pri { color: #fff; background: linear-gradient(135deg, var(--g1), var(--g2));
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--g1) 55%, #000 45%); }
+.pf-btn.pri:active { box-shadow: 0 1px 0 color-mix(in srgb, var(--g1) 55%, #000 45%); }
+
+/* তথ্য-কার্ড (হেলে ওঠে) */
+.pf-cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin: 14px 0; perspective: 800px; }
+.pf-c { --rx: 0deg; --ry: 0deg; position: relative; padding: 16px; border-radius: 18px; overflow: hidden;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 13%, transparent);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--g1) 30%, transparent), 0 18px 24px -16px color-mix(in srgb, var(--g1) 60%, transparent);
+  transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .15s ease-out; transform-style: preserve-3d; }
+.pf-c::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--g1), var(--g2)); }
+.pf-ci { font-size: 1.9em; line-height: 1; margin-bottom: 8px; display: block; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .22)); transform: translateZ(18px); }
+.pf-c h3 { margin: 0 0 6px; font-size: 1.02em; line-height: 1.3; }
+.pf-c p { margin: 0; font-size: .93em; line-height: 1.6; opacity: .82; }
+.pf-c .pf-btn { margin-top: 12px; padding: 8px 14px; font-size: .9em; }
+
+/* টাইমলাইন */
+.pf-tl { list-style: none; margin: 14px 0; padding: 0 0 0 26px; position: relative; display: grid; gap: 14px; }
+.pf-tl::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 3px; border-radius: 3px;
+  background: linear-gradient(var(--g1), var(--g2)); opacity: .55; }
+.pf-ti { position: relative; padding: 13px 15px; border-radius: 16px;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  box-shadow: 0 3px 0 color-mix(in srgb, currentColor 10%, transparent); }
+.pf-ti::before { content: ""; position: absolute; left: -26px; top: 16px; width: 19px; height: 19px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #fff, var(--g1) 55%, var(--g2));
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--g1) 55%, #000 45%), 0 8px 12px -4px var(--g1); }
+.pf-ty { display: inline-block; margin-bottom: 4px; padding: 2px 10px; border-radius: 999px; font-size: .8em; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--g1), var(--g2)); }
+.pf-ti h3 { margin: 0; font-size: 1.02em; line-height: 1.35; }
+.pf-ts { margin: 2px 0 0; font-size: .9em; opacity: .75; }
+.pf-td { margin: 8px 0 0; font-size: .93em; line-height: 1.65; opacity: .85; }
+
+/* ঢোকার অ্যানিমেশন */
+@keyframes pfUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.pf-in { animation: pfUp .45s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-in { animation: none; }
+  .pf-c { transition: none; }
+}
