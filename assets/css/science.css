@@ -1,0 +1,58 @@
+/* Easy Science পেজের অতিরিক্ত স্টাইল। style.css-এর পরে লোড হবে।
+   রং: --c1 (মূল সাইটে Easy Science-এর রং)। ডার্ক/লাইট দুই মোডেই কাজ করে। */
+.pv { padding-top: 22px; padding-bottom: 40px; }
+.sc-title { margin: 6px 0 12px; }
+.sc-p { margin: 0 0 16px; line-height: 1.7; max-width: 62ch; }
+.sc-h { margin: 26px 0 10px; }
+.sc-note { margin: 16px 0; padding: 12px 14px; border-radius: 12px; font-size: .95em;
+  border: 1px dashed color-mix(in srgb, currentColor 30%, transparent); opacity: .85; }
+.sc-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+
+/* নেভিগেশনের সক্রিয় pill */
+.pills .sc-on { background: var(--c1, #2563eb); color: #fff; border-color: transparent; }
+
+/* টপিক কার্ড */
+.sc-topics { display: grid; gap: 12px; margin: 8px 0 18px; }
+.sc-card { border-radius: 16px; overflow: hidden;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  background: color-mix(in srgb, currentColor 4%, transparent);
+  border-top: 3px solid var(--c1, #2563eb); }
+.sc-card summary { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; list-style: none; }
+.sc-card summary::-webkit-details-marker { display: none; }
+.sc-card summary::after { content: "+"; margin-left: auto; font-size: 1.4em; opacity: .6; }
+.sc-card[open] summary::after { content: "–"; }
+.sc-ico { font-size: 1.6em; line-height: 1; }
+.sc-tt { display: flex; flex-direction: column; gap: 2px; }
+.sc-tt small { opacity: .7; }
+.sc-body { padding: 2px 16px 16px; }
+.sc-body ul { margin: 0 0 12px; padding-left: 20px; line-height: 1.7; }
+.sc-f { display: flex; flex-direction: column; gap: 4px; margin: 10px 0; padding: 10px 14px; border-radius: 12px;
+  background: color-mix(in srgb, var(--c1, #2563eb) 12%, transparent); }
+.sc-f span { font-size: .8em; opacity: .75; }
+.sc-f code { font-size: 1.1em; font-weight: 600; overflow-x: auto; white-space: nowrap; font-family: inherit; }
+.sc-ex { margin-top: 10px; line-height: 1.6; }
+
+/* ডায়াগ্রাম */
+.sc-fig { margin: 14px 0 22px; padding: 14px; border-radius: 16px;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  background: color-mix(in srgb, currentColor 4%, transparent); }
+.sc-svg svg { display: block; width: 100%; max-width: 460px; margin: 0 auto; height: auto; }
+.sc-fig figcaption { margin-top: 10px; font-size: .92em; line-height: 1.6; opacity: .85; }
+
+/* কুইজ */
+.sc-q { margin: 0 0 14px; padding: 14px 16px; border-radius: 16px;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  background: color-mix(in srgb, currentColor 4%, transparent); }
+.sc-qt { margin: 0 0 10px; font-weight: 600; line-height: 1.5; }
+.sc-opts { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.sc-o { padding: 10px 12px; border-radius: 12px; font: inherit; color: inherit; text-align: left; cursor: pointer;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent); background: transparent; }
+.sc-o:disabled { cursor: default; opacity: .75; }
+.sc-o.ok { border-color: #16a34a; background: color-mix(in srgb, #16a34a 18%, transparent); opacity: 1; }
+.sc-o.no { border-color: #dc2626; background: color-mix(in srgb, #dc2626 16%, transparent); opacity: 1; }
+.sc-fb { margin-top: 10px; font-size: .94em; line-height: 1.6; }
+.sc-fb.good { color: #16a34a; }
+.sc-fb.bad { color: #dc2626; }
+.sc-score { margin-top: 6px; font-weight: 700; }
+.sc-result { margin: 8px 0 0; min-height: 1.4em; }
+.sc-result .btn { margin-left: 6px; }
