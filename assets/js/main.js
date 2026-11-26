@@ -1,7 +1,7 @@
 (function () {
 "use strict";
 /* সেকশন তৈরি হলে এখানে false বদলে true করবে */
-var READY = { portfolio: true, science: false, hub: false, tools: false };
+var READY = { portfolio: true, science: true, hub: false, tools: false };
 var EMAIL = "shawonhasnatofficials@gmail.com";
 
 var UI = {
