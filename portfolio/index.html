@@ -12,10 +12,14 @@
 <link rel="stylesheet" href="/assets/css/portfolio.css">
 </head>
 <body>
+<script>
+function showErr(t){var d=document.createElement("pre");d.style.cssText="position:relative;z-index:9999;margin:0;padding:12px;background:#fee;color:#b00;white-space:pre-wrap;font:13px monospace";d.textContent=t;document.body.insertBefore(d,document.body.firstChild);}
+window.onerror=function(m,u,l){showErr("ERROR: "+m+"\n"+(u||"")+" line "+l);};
+</script>
 <header id="site-header"></header>
 <main class="w pv" id="view"></main>
 <footer id="site-footer"></footer>
-<script src="/data/portfolio.js"></script>
-<script src="/assets/js/portfolio.js"></script>
+<script src="/data/portfolio.js" onerror="showErr('LOAD FAILED: /data/portfolio.js')"></script>
+<script src="/assets/js/portfolio.js" onerror="showErr('LOAD FAILED: /assets/js/portfolio.js')"></script>
 </body>
 </html>
