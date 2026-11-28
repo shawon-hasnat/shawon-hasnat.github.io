@@ -3,7 +3,7 @@
 var EMAIL = "shawonhasnatofficials@gmail.com";
 var UI = {
   bn: { name: "শাওন হাসনাত বাবু", other: "English", main: "মূল সাইট", contact: "যোগাযোগ", rights: "সর্বস্বত্ব সংরক্ষিত",
-        home: "হোম", back: "← Opportunity Hub", kicker: "Opportunity Hub",
+        home: "হোম", backC: "← Study Abroad Guide", offRes: "অফিশিয়াল রিসোর্স", moreC: "আরও দেশ ধাপে ধাপে যোগ হবে। প্রতিটি দেশের তথ্য অফিশিয়াল সোর্স দেখে যাচাই করে তবেই যোগ হয়।", back: "← Opportunity Hub", kicker: "Opportunity Hub",
         slogan: "সুযোগ আবিষ্কার করো। দক্ষতা বাড়াও। ভবিষ্যৎ গড়ো।",
         intro: "স্কলারশিপ, বিদেশে পড়াশোনা, প্রতিযোগিতা, ফ্রি কোর্স, গবেষণা ও দক্ষতা উন্নয়নের সুযোগ এক জায়গায়। বিনামূল্যের এই প্ল্যাটফর্ম বিশেষভাবে বাংলাদেশের শিক্ষার্থীদের জন্য।",
         ph: "স্কলারশিপ, কোর্স, প্রতিযোগিতা, গাইড খুঁজুন…", sr: "সার্চের ফলাফল", none: "কিছু পাওয়া যায়নি। অন্য শব্দে খুঁজে দেখুন।",
@@ -22,7 +22,7 @@ var UI = {
         types: ["Scholarship", "Competition", "Free course", "Educational website", "Student guide", "Event / program", "Other"],
         policy: "এখানের তথ্য অফিশিয়াল সোর্স দেখে যাচাই করা। আবেদনের আগে অবশ্যই অফিশিয়াল সাইটে শেষ তারিখ ও শর্ত মিলিয়ে নিন। এটি ভর্তি, বৃত্তি বা ভিসার কোনো নিশ্চয়তা দেয় না।" },
   en: { name: "Shawon Hasnat Babu", other: "বাংলা", main: "Main site", contact: "Contact", rights: "All rights reserved",
-        home: "Home", back: "← Opportunity Hub", kicker: "Opportunity Hub",
+        home: "Home", backC: "← Study Abroad Guide", offRes: "Official resources", moreC: "More countries will be added step by step, each only after checking official sources.", back: "← Opportunity Hub", kicker: "Opportunity Hub",
         slogan: "Discover opportunities. Build skills. Shape your future.",
         intro: "Scholarships, studying abroad, competitions, free courses, research and skill development in one place. A free platform made especially for students in Bangladesh.",
         ph: "Search scholarships, courses, competitions, guides…", sr: "Search results", none: "Nothing found. Try different words.",
@@ -41,7 +41,8 @@ var UI = {
         types: ["Scholarship", "Competition", "Free course", "Educational website", "Student guide", "Event / program", "Other"],
         policy: "Information here is checked against official sources. Always confirm deadlines and requirements on the official site before applying. Nothing here guarantees admission, funding or a visa." }
 };
-var H = window.HUB, SEC = H.sections, ITEMS = H.items || [];
+var H = window.HUB, SEC = H.sections, ITEMS = H.items || [], CTRY = window.HUB_C || [];
+function ctryById(id) { for (var i = 0; i < CTRY.length; i++) if (CTRY[i].id === id) return CTRY[i]; return null; }
 function $(id) { return document.getElementById(id); }
 function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
@@ -127,6 +128,9 @@ function search(q) {
     var hay = (both(s.t) + " " + both(s.d) + " " + (s.cats || []).map(both).join(" ") + " " + (s.plan || []).map(both).join(" ")).toLowerCase();
     if (hay.indexOf(q) > -1) out.push({ title: tr(s.t), sub: tr(s.d), href: "#s/" + s.id });
   });
+  CTRY.forEach(function (c) {
+    if ((both(c.t) + " " + c.id + " " + both(c.tag)).toLowerCase().indexOf(q) > -1) out.push({ title: c.e + " " + tr(c.t), sub: tr(c.tag), href: "#country/" + c.id });
+  });
   ITEMS.forEach(function (i) {
     var hay = (both(i.t) + " " + both(i.d) + " " + (i.tags || []).join(" ") + " " + both(i.cat)).toLowerCase();
     if (hay.indexOf(q) > -1) {
@@ -171,7 +175,7 @@ function grid() {
   SEC.forEach(function (s) {
     var c = el("a", "hb-cat"); c.href = "#s/" + s.id;
     c.appendChild(el("i", "", s.e)); c.appendChild(el("strong", "", tr(s.t))); c.appendChild(el("p", "", tr(s.d)));
-    var n = secItems(s.id).length;
+    var n = s.id === "countries" ? CTRY.length : secItems(s.id).length;
     c.appendChild(el("span", "hb-badge" + (n ? "" : " soon"), n ? n + d.items : d.soon));
     tilt(c); g.appendChild(c);
   });
@@ -243,7 +247,43 @@ function home() {
 }
 
 /* ---------- সেকশন পেজ ---------- */
+function countryPage(c) {
+  var d = UI[lang], page = el("div", "hb-page");
+  var back = el("a", "hb-back", d.backC); back.href = "#s/countries"; page.appendChild(back);
+  page.appendChild(el("h1", "", c.e + " " + tr(c.t))); page.appendChild(el("p", "hb-lead", tr(c.tag)));
+  var ul = el("ul", "hb-meta");
+  (c.facts || []).forEach(function (m) { var li = el("li"); li.appendChild(el("b", "", tr(m.k) + ":")); li.appendChild(document.createTextNode(" " + tr(m.v))); ul.appendChild(li); });
+  if (c.facts && c.facts.length) page.appendChild(ul);
+  var rel = ITEMS.filter(function (i) { return i.s === "scholarships" && (i.tags || []).indexOf(c.id) > -1; });
+  c.secs.forEach(function (sec, k) {
+    var dt = el("details", "hb-acc"); if (k === 0) dt.open = true;
+    dt.appendChild(el("summary", "", tr(sec.h)));
+    sec.p.forEach(function (p) { dt.appendChild(el("p", "", tr(p))); });
+    page.appendChild(dt);
+    if (sec.h.en === "Scholarships" && rel.length) { var w = el("div", "hb-accx"); w.appendChild(listOf(rel)); dt.appendChild(w); }
+  });
+  var h = el("h2", "hb-sub2", d.offRes); page.appendChild(h);
+  var a = el("div", "hb-actions"); c.links.forEach(function (l) { a.appendChild(btn(l.t, l.url, false, true)); }); page.appendChild(a);
+  page.appendChild(el("p", "hb-ver", d.verified + ": " + fmtDate(c.verified)));
+  page.appendChild(el("p", "hb-note", d.policy));
+  return page;
+}
+function countriesPage(s) {
+  var d = UI[lang], page = el("div", "hb-page");
+  var back = el("a", "hb-back", d.back); back.href = "#"; page.appendChild(back);
+  page.appendChild(el("h1", "", s.e + " " + tr(s.t))); page.appendChild(el("p", "hb-lead", tr(s.d)));
+  var g = el("div", "hb-grid");
+  CTRY.forEach(function (c) {
+    var a = el("a", "hb-cat"); a.href = "#country/" + c.id;
+    a.appendChild(el("i", "", c.e)); a.appendChild(el("strong", "", tr(c.t))); a.appendChild(el("p", "", tr(c.tag)));
+    tilt(a); g.appendChild(a);
+  });
+  page.appendChild(g);
+  page.appendChild(el("p", "hb-note", d.moreC));
+  return page;
+}
 function sectionPage(s) {
+  if (s.id === "countries" && CTRY.length) return countriesPage(s);
   var d = UI[lang], page = el("div", "hb-page"), items = secItems(s.id), cur = null;
   var back = el("a", "hb-back", d.back); back.href = "#"; page.appendChild(back);
   page.appendChild(el("h1", "", s.e + " " + tr(s.t))); page.appendChild(el("p", "hb-lead", tr(s.d)));
@@ -279,20 +319,21 @@ function sectionPage(s) {
 /* ---------- রাউটার ---------- */
 function route() {
   var h = (location.hash || "").replace(/^#\/?/, "").split("/");
+  if (h[0] === "country" && ctryById(h[1])) return { kind: "c", c: ctryById(h[1]) };
   if (h[0] === "s" && secById(h[1])) return { kind: "s", s: secById(h[1]) };
   return { kind: "home" };
 }
 function render() {
   var d = UI[lang], r = route(), v = $("view");
   document.documentElement.lang = lang;
-  document.title = (r.kind === "s" ? tr(r.s.t) : "Opportunity Hub") + " | " + d.name;
+  document.title = (r.kind === "s" ? tr(r.s.t) : r.kind === "c" ? tr(r.c.t) : "Opportunity Hub") + " | " + d.name;
   $("hbn").textContent = d.name; $("lang").textContent = d.other;
   $("fn").textContent = d.name; $("fc").textContent = d.contact; $("fm").textContent = d.main; $("fp").textContent = d.policy;
   $("fr").textContent = "© " + new Date().getFullYear() + " " + d.name + ". " + d.rights + ".";
   homePill.textContent = "🏠 " + d.home; homePill.className = r.kind === "home" ? "hb-on" : "";
-  SEC.forEach(function (s) { var p = $("pill-" + s.id); p.textContent = s.e + " " + tr(s.t); p.className = r.kind === "s" && r.s.id === s.id ? "hb-on" : ""; });
+  SEC.forEach(function (s) { var p = $("pill-" + s.id); p.textContent = s.e + " " + tr(s.t); p.className = (r.kind === "s" && r.s.id === s.id) || (r.kind === "c" && s.id === "countries") ? "hb-on" : ""; });
   v.textContent = "";
-  v.appendChild(r.kind === "s" ? sectionPage(r.s) : home());
+  v.appendChild(r.kind === "c" ? countryPage(r.c) : r.kind === "s" ? sectionPage(r.s) : home());
 }
 window.addEventListener("hashchange", function () { render(); window.scrollTo(0, 0); });
 render();
