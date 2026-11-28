@@ -103,3 +103,13 @@ button.hb-chip.on { color: #fff; background: var(--ac); border-color: transparen
 .hb-note { margin: 12px 0 0; font-size: .85em; line-height: 1.6; opacity: .7; max-width: 62ch; }
 
 @media (prefers-reduced-motion: reduce) { .hb-cat, .hb-btn { transition: none; } }
+
+/* ---------- দেশের পেজ ---------- */
+.hb-acc { margin: 0 0 10px; padding: 0 16px; border-radius: 16px; border: 1px solid color-mix(in srgb, currentColor 13%, transparent); background: color-mix(in srgb, currentColor 4%, transparent); }
+.hb-acc summary { cursor: pointer; padding: 14px 0; font-weight: 700; list-style: none; }
+.hb-acc summary::-webkit-details-marker { display: none; }
+.hb-acc summary::after { content: "+"; float: right; color: var(--ac); font-weight: 700; }
+.hb-acc[open] summary::after { content: "−"; }
+.hb-acc p { margin: 0 0 10px; line-height: 1.7; font-size: .94em; opacity: .9; }
+.hb-accx { padding: 4px 0 14px; }
+.hb-sub2 { margin: 22px 0 10px; font-size: 1.1em; }
